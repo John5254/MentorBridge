@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marketplace – MentorBridge NG</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .search-box {
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 13px 16px 13px 44px;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: var(--gray-500);
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .filter-select {
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--gray-200);
+      font-size: 13px;
+      background: white;
+      min-width: 120px;
+    }
+
+    .clear-btn {
+      padding: 9px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--gray-200);
+      background: white;
+      font-size: 13px;
+      color: var(--gray-600);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* Status Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-open {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .badge-progress {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .badge-completed {
+      background: #e0e7ff;
+      color: #3730a3;
+    }
+
+    .badge-closed {
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--gray-500);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Marketplace</h1>
+    </div>
+
+    <div class="page">
+      <!-- Search -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search gigs..." oninput="filterGigs()" />
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <select id="locationFilter" class="filter-select" onchange="filterGigs()">
+          <option value="">All Locations</option>
+          <option value="Kano">Kano</option>
+          <option value="Kaduna">Kaduna</option>
+          <option value="Lagos">Lagos</option>
+          <option value="Abuja">Abuja</option>
+        </select>
+
+        <select id="durationFilter" class="filter-select" onchange="filterGigs()">
+          <option value="">All Durations</option>
+          <option value="1 Week">1 Week</option>
+          <option value="2 Weeks">2 Weeks</option>
+          <option value="3 Weeks">3 Weeks</option>
+        </select>
+
+        <button class="clear-btn" onclick="clearFilters()">Clear</button>
+      </div>
+
+      <!-- Gig List -->
+      <div id="gig-list"></div>
+      <div id="no-results" class="no-results" style="display: none;">
+        <div style="font-size: 40px; margin-bottom: 12px;">🔍</div>
+        <h3>No gigs found</h3>
+        <p>Try changing your search or filters</p>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="home.html" class="nav-item">
+        <span>🏠</span>
+        Home
+      </a>
+      <a href="academy.html" class="nav-item">
+        <span>📚</span>
+        Academy
+      </a>
+      <a href="marketplace.html" class="nav-item active">
+        <span>🛒</span>
+        Marketplace
+      </a>
+      <a href="my-gigs.html" class="nav-item">
+        <span>📋</span>
+        My Gigs
+      </a>
+      <a href="profile.html" class="nav-item">
+        <span>👤</span>
+        Profile
+      </a>
+    </nav>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Extended mock data with more gigs and statuses
+    const allGigs = [
+      {
+        id: "gig001",
+        title: "Community Literacy Mentor",
+        location: "Kano",
+        children: 25,
+        duration: "2 Weeks",
+        status: "Open",
+        reward: "₦10,000"
+      },
+      {
+        id: "gig002",
+        title: "Weekend Numeracy Coach",
+        location: "Kaduna",
+        children: 15,
+        duration: "1 Week",
+        status: "Open",
+        reward: "₦7,500"
+      },
+      {
+        id: "gig003",
+        title: "Reading Circle Facilitator",
+        location: "Kano",
+        children: 20,
+        duration: "3 Weeks",
+        status: "Open",
+        reward: "₦12,000"
+      },
+      {
+        id: "gig004",
+        title: "Basic Science Tutor",
+        location: "Lagos",
+        children: 18,
+        duration: "2 Weeks",
+        status: "Open",
+        reward: "₦9,000"
+      }
+    ];
+
+    function getStatusBadge(status) {
+      const statusMap = {
+        "Open": "badge-open",
+        "In Progress": "badge-progress",
+        "Completed": "badge-completed",
+        "Closed": "badge-closed"
+      };
+      return `<span class="badge ${statusMap[status] || 'badge-open'}">${status}</span>`;
+    }
+
+    function renderGigs(gigsToShow) {
+      const list = document.getElementById("gig-list");
+      const noResults = document.getElementById("no-results");
+
+      list.innerHTML = "";
+
+      if (gigsToShow.length === 0) {
+        noResults.style.display = "block";
+        return;
+      }
+
+      noResults.style.display = "none";
+
+      gigsToShow.forEach(gig => {
+        list.innerHTML += `
+          <div class="card">
+            <div class="card-title">${gig.title}</div>
+            <div class="card-meta">
+              <span>📍 ${gig.location}</span>
+              <span>👥 ${gig.children} Children</span>
+              <span>⏱ ${gig.duration}</span>
+            </div>
+            <div class="flex justify-between items-center mt-2">
+              ${getStatusBadge(gig.status)}
+              <span style="font-weight: 600; color: var(--primary);">${gig.reward}</span>
+            </div>
+            <a href="gig-details.html?id=${gig.id}" class="btn btn-primary mt-4" style="display:block; text-align:center;">
+              View Details
+            </a>
+          </div>
+        `;
+      });
+    }
+
+    function filterGigs() {
+      const search = document.getElementById("searchInput").value.toLowerCase();
+      const location = document.getElementById("locationFilter").value;
+      const duration = document.getElementById("durationFilter").value;
+
+      const filtered = allGigs.filter(gig => {
+        const matchSearch = gig.title.toLowerCase().includes(search);
+        const matchLocation = location === "" || gig.location === location;
+        const matchDuration = duration === "" || gig.duration === duration;
+        return matchSearch && matchLocation && matchDuration;
+      });
+
+      renderGigs(filtered);
+    }
+
+    function clearFilters() {
+      document.getElementById("searchInput").value = "";
+      document.getElementById("locationFilter").value = "";
+      document.getElementById("durationFilter").value = "";
+      renderGigs(allGigs);
+    }
+
+    // Initial render
+    renderGigs(allGigs);
+  </script>
+</body>
+</html>

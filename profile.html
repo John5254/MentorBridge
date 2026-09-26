@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile – MentorBridge NG</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .profile-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .avatar-large {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ccfbf1;
+      margin-bottom: 12px;
+    }
+
+    .profile-header h2 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .profile-header .role {
+      color: var(--gray-500);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fef3c7;
+      color: #92400e;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .stat-box {
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      border: 1px solid var(--gray-100);
+    }
+
+    .stat-box .number {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-box .label {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .badges-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .badge-card {
+      background: white;
+      border: 1px solid var(--gray-100);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .badge-card .icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .badge-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-item h4 {
+      font-size: 15px;
+    }
+
+    .history-item p {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>Profile</h1>
+      <button style="background:none; border:none; font-size:20px; cursor:pointer;">⚙️</button>
+    </div>
+
+    <div class="page">
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <img src="https://i.pravatar.cc/150?img=12" alt="Avatar" class="avatar-large" />
+        <h2>John Beloved</h2>
+        <div class="role">NYSC Corps Member • Kano State</div>
+        <div class="rating">⭐ 4.8 / 5 (12 reviews)</div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="number">12</div>
+          <div class="label">Completed Gigs</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">84</div>
+          <div class="label">Service Hours</div>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="section-title">Badges</div>
+      <div class="badges-grid">
+        <div class="badge-card">
+          <div class="icon">🛡️</div>
+          <h4>Mentor Certification</h4>
+        </div>
+        <div class="badge-card">
+          <div class="icon">📍</div>
+          <h4>Community Educator</h4>
+        </div>
+      </div>
+
+      <!-- Portfolio History -->
+      <div class="section-title">Portfolio History</div>
+      <div class="card">
+        <div class="history-item">
+          <div>
+            <h4>Community Literacy Mentor</h4>
+            <p>Kano • Completed</p>
+          </div>
+          <span>›</span>
+        </div>
+        <div class="history-item">
+          <div>
+            <h4>Weekend Numeracy Coach</h4>
+            <p>Kaduna • Completed</p>
+          </div>
+          <span>›</span>
+        </div>
+        <div class="history-item">
+          <div>
+            <h4>Reading Circle Facilitator</h4>
+            <p>Kano • Completed</p>
+          </div>
+          <span>›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="home.html" class="nav-item">
+        <span>🏠</span>
+        Home
+      </a>
+      <a href="academy.html" class="nav-item">
+        <span>📚</span>
+        Academy
+      </a>
+      <a href="marketplace.html" class="nav-item">
+        <span>🛒</span>
+        Marketplace
+      </a>
+      <a href="my-gigs.html" class="nav-item">
+        <span>📋</span>
+        My Gigs
+      </a>
+      <a href="profile.html" class="nav-item active">
+        <span>👤</span>
+        Profile
+      </a>
+    </nav>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

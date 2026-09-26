@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home – MentorBridge NG</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .welcome-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ccfbf1;
+    }
+
+    .welcome-text h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .welcome-text p {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      border: 1px solid var(--gray-100);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .stat-card .number {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .stat-card .label {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .active-gig-card {
+      background: linear-gradient(135deg, #0d9488, #0f766e);
+      color: white;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 28px;
+    }
+
+    .active-gig-card h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .active-gig-card .meta {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-bottom: 14px;
+    }
+
+    .btn-white {
+      background: white;
+      color: #0d9488;
+      font-weight: 600;
+      padding: 10px 16px;
+      font-size: 14px;
+      width: auto;
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 10px;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .quick-btn {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-700);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quick-btn span {
+      font-size: 22px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Home</h1>
+    </div>
+
+    <div class="page">
+      <!-- Welcome -->
+      <div class="welcome-header">
+        <img src="https://i.pravatar.cc/150?img=12" alt="Avatar" class="avatar" />
+        <div class="welcome-text">
+          <h2>Hello, John 👋</h2>
+          <p>NYSC Corps Member • Kano State</p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">1</div>
+          <div class="label">Active Gigs</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">12</div>
+          <div class="label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">84</div>
+          <div class="label">Service Hours</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">4.8</div>
+          <div class="label">Rating</div>
+        </div>
+      </div>
+
+      <!-- Active Gig -->
+      <div class="section-title">Active Gig</div>
+
+      <div class="active-gig-card">
+        <h3>Community Literacy Mentor</h3>
+        <div class="meta">
+          📍 Kano &nbsp;•&nbsp; 👥 25 Children &nbsp;•&nbsp; ⏱ 2 Weeks
+        </div>
+        <a href="workspace.html" class="btn-white">Open Workspace</a>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="section-title">Quick Actions</div>
+
+      <div class="quick-actions">
+        <a href="marketplace.html" class="quick-btn">
+          <span>🛒</span>
+          Browse Gigs
+        </a>
+        <a href="academy.html" class="quick-btn">
+          <span>📚</span>
+          Academy
+        </a>
+        <a href="my-gigs.html" class="quick-btn">
+          <span>📋</span>
+          My Gigs
+        </a>
+        <a href="profile.html" class="quick-btn">
+          <span>👤</span>
+          Profile
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="home.html" class="nav-item active">
+        <span>🏠</span>
+        Home
+      </a>
+      <a href="academy.html" class="nav-item">
+        <span>📚</span>
+        Academy
+      </a>
+      <a href="marketplace.html" class="nav-item">
+        <span>🛒</span>
+        Marketplace
+      </a>
+      <a href="my-gigs.html" class="nav-item">
+        <span>📋</span>
+        My Gigs
+      </a>
+      <a href="profile.html" class="nav-item">
+        <span>👤</span>
+        Profile
+      </a>
+    </nav>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

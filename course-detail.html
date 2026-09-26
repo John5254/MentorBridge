@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Detail – MentorBridge NG</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .course-hero {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .course-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .play-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .play-btn-large {
+      width: 64px;
+      height: 64px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: var(--primary);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .duration-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .course-body {
+      padding: 20px 16px 40px;
+    }
+
+    .course-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .course-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 24px 0 12px;
+    }
+
+    .learning-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .learning-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .learning-list li::before {
+      content: "✓";
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .required-tag {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="back-btn" onclick="history.back()">←</button>
+      <h1>Course</h1>
+      <div style="width: 32px;"></div>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="course-hero">
+      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800" alt="Course Thumbnail">
+      <div class="play-overlay">
+        <div class="play-btn-large">▶</div>
+      </div>
+      <div class="duration-badge">12:45</div>
+    </div>
+
+    <div class="course-body">
+      <div class="required-tag">Required</div>
+
+      <h1 class="course-title">Child Safeguarding & Ethics 101</h1>
+
+      <div class="course-meta">
+        <span>⏱ 30 mins</span>
+        <span>📚 1 Module</span>
+      </div>
+
+      <div class="section-title">About this course</div>
+      <p style="font-size: 15px; color: var(--gray-700); line-height: 1.6;">
+        Learn how to protect children, recognize risks, and practice safe, ethical mentoring in your community. 
+        This course is mandatory before you can claim any gig on the platform.
+      </p>
+
+      <div class="section-title">What you'll learn</div>
+      <ul class="learning-list">
+        <li>Understanding child protection principles</li>
+        <li>Safe mentoring practices</li>
+        <li>Ethical responsibilities as a mentor</li>
+        <li>Community engagement guidelines</li>
+        <li>How to report concerns properly</li>
+      </ul>
+
+      <!-- Mark as Completed Button -->
+      <button id="completeBtn" class="btn btn-primary" style="margin-top: 32px;" onclick="markAsCompleted()">
+        Mark as Completed
+      </button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Check completion status when page loads
+    document.addEventListener("DOMContentLoaded", function () {
+      const isCompleted = localStorage.getItem("course_safeguarding_completed") === "true";
+      const btn = document.getElementById("completeBtn");
+
+      if (isCompleted) {
+        btn.textContent = "Completed ✓";
+        btn.style.background = "#059669";
+        btn.disabled = true;
+      }
+    });
+
+    function markAsCompleted() {
+      // Save permanently in the browser
+      localStorage.setItem("course_safeguarding_completed", "true");
+
+      const btn = document.getElementById("completeBtn");
+      btn.textContent = "Completed ✓";
+      btn.style.background = "#059669";
+      btn.disabled = true;
+
+      setTimeout(() => {
+        alert("Congratulations! You have completed the required course.\nYou can now access the Marketplace.");
+      }, 300);
+    }
+  </script>
+</body>
+</html>

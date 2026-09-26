@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Gigs – MentorBridge NG</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: #f3f4f6;
+      padding: 5px;
+      border-radius: 14px;
+    }
+    
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--gray-500);
+      border: none;
+      background: transparent;
+    }
+    
+    .tab.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+    
+    .gig-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid var(--gray-100);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    
+    .gig-card-header {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    
+    .gig-image {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    
+    .gig-info h3 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    
+    .gig-info .meta {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+    }
+    
+    /* Status Badges - consistent with Marketplace */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .badge-open {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    
+    .badge-progress {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    
+    .badge-completed {
+      background: #e0e7ff;
+      color: #3730a3;
+    }
+    
+    .badge-closed {
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>My Gigs</h1>
+    </div>
+    
+    <div class="page">
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('active')">Active (1)</button>
+        <button class="tab" onclick="switchTab('completed')">Completed (2)</button>
+      </div>
+      
+      <!-- Active Gigs -->
+      <div id="active-gigs">
+        <div class="gig-card">
+          <div class="gig-card-header">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=200" alt="Gig" class="gig-image">
+            <div class="gig-info">
+              <h3>Community Literacy Mentor</h3>
+              <div class="meta">📍 Kano • 👥 25 Children • ⏱ 2 Weeks</div>
+              <span class="badge badge-progress">In Progress</span>
+            </div>
+          </div>
+          <a href="workspace.html" class="btn btn-primary">
+            Open Workspace
+          </a>
+        </div>
+      </div>
+      
+      <!-- Completed Gigs -->
+      <div id="completed-gigs" style="display: none;">
+        <div class="gig-card">
+          <div class="gig-card-header">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=200" alt="Gig" class="gig-image">
+            <div class="gig-info">
+              <h3>Weekend Numeracy Coach</h3>
+              <div class="meta">📍 Kaduna • 👥 15 Children • ⏱ 1 Week</div>
+              <span class="badge badge-completed">Completed</span>
+            </div>
+          </div>
+          <a href="#" class="btn btn-outline">
+            View Details
+          </a>
+        </div>
+        
+        <div class="gig-card">
+          <div class="gig-card-header">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=200" alt="Gig" class="gig-image">
+            <div class="gig-info">
+              <h3>Reading Circle Facilitator</h3>
+              <div class="meta">📍 Kano • 👥 20 Children • ⏱ 3 Weeks</div>
+              <span class="badge badge-completed">Completed</span>
+            </div>
+          </div>
+          <a href="#" class="btn btn-outline">
+            View Details
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="home.html" class="nav-item">
+        <span>🏠</span>
+        Home
+      </a>
+      <a href="academy.html" class="nav-item">
+        <span>📚</span>
+        Academy
+      </a>
+      <a href="marketplace.html" class="nav-item">
+        <span>🛒</span>
+        Marketplace
+      </a>
+      <a href="my-gigs.html" class="nav-item active">
+        <span>📋</span>
+        My Gigs
+      </a>
+      <a href="profile.html" class="nav-item">
+        <span>👤</span>
+        Profile
+      </a>
+    </nav>
+  </div>
+  
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function switchTab(tab) {
+      const tabs = document.querySelectorAll('.tab');
+      const activeGigs = document.getElementById('active-gigs');
+      const completedGigs = document.getElementById('completed-gigs');
+      
+      tabs.forEach(t => t.classList.remove('active'));
+      
+      if (tab === 'active') {
+        tabs[0].classList.add('active');
+        activeGigs.style.display = 'block';
+        completedGigs.style.display = 'none';
+      } else {
+        tabs[1].classList.add('active');
+        activeGigs.style.display = 'none';
+        completedGigs.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+
+</html>

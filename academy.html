@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academy – MentorBridge NG</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .course-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--gray-100);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-bottom: 16px;
+    }
+
+    .course-image {
+      width: 100%;
+      height: 160px;
+      position: relative;
+    }
+
+    .course-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .course-content {
+      padding: 16px;
+    }
+
+    .course-content h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .course-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+    }
+
+    .required-badge {
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    .completed-badge {
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Academy</h1>
+    </div>
+
+    <div class="page">
+      <p style="color: var(--gray-500); font-size: 14px; margin-bottom: 20px;">
+        Complete required courses to unlock the Marketplace and earn badges.
+      </p>
+
+      <!-- Course 1 - Required -->
+      <div class="course-card">
+        <div class="course-image">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600" alt="Course">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="course-content">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h3>Child Safeguarding & Ethics 101</h3>
+            <span id="course1-badge" class="required-badge">Required</span>
+          </div>
+          <div class="course-meta">
+            <span>⏱ 30 mins</span>
+            <span>📚 1 Module</span>
+          </div>
+          <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">
+            Learn how to protect children, recognize risks, and practice safe, ethical mentoring.
+          </p>
+          <a href="course-detail.html" class="btn btn-primary" id="course1-btn">
+            Start Course
+          </a>
+        </div>
+      </div>
+
+      <!-- Course 2 -->
+      <div class="course-card">
+        <div class="course-image">
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600" alt="Course">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="course-content">
+          <h3>Grassroots Facilitation Skills</h3>
+          <div class="course-meta">
+            <span>⏱ 45 mins</span>
+            <span>📚 2 Modules</span>
+          </div>
+          <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">
+            Master practical techniques for engaging out-of-school children effectively.
+          </p>
+          <button class="btn btn-outline" id="course2-btn" disabled style="opacity: 0.6;">
+            Locked – Complete Required Course First
+          </button>
+        </div>
+      </div>
+
+      <!-- Course 3 -->
+      <div class="course-card">
+        <div class="course-image">
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600" alt="Course">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="course-content">
+          <h3>Monitoring & Evaluation Basics</h3>
+          <div class="course-meta">
+            <span>⏱ 40 mins</span>
+            <span>📚 2 Modules</span>
+          </div>
+          <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">
+            Learn how to track attendance, measure impact, and report results.
+          </p>
+          <button class="btn btn-outline" id="course3-btn" disabled style="opacity: 0.6;">
+            Locked – Complete Required Course First
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="home.html" class="nav-item">
+        <span>🏠</span>
+        Home
+      </a>
+      <a href="academy.html" class="nav-item active">
+        <span>📚</span>
+        Academy
+      </a>
+      <a href="marketplace.html" class="nav-item">
+        <span>🛒</span>
+        Marketplace
+      </a>
+      <a href="my-gigs.html" class="nav-item">
+        <span>📋</span>
+        My Gigs
+      </a>
+      <a href="profile.html" class="nav-item">
+        <span>👤</span>
+        Profile
+      </a>
+    </nav>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const isCompleted = localStorage.getItem("course_safeguarding_completed") === "true";
+
+      if (isCompleted) {
+        // Update Course 1
+        const badge = document.getElementById("course1-badge");
+        badge.textContent = "Completed";
+        badge.className = "completed-badge";
+
+        const btn1 = document.getElementById("course1-btn");
+        btn1.textContent = "Completed ✓";
+        btn1.style.background = "#059669";
+        btn1.href = "course-detail.html";
+
+        // Unlock other courses
+        const btn2 = document.getElementById("course2-btn");
+        btn2.disabled = false;
+        btn2.style.opacity = "1";
+        btn2.textContent = "Start Course";
+        btn2.className = "btn btn-primary";
+        btn2.onclick = () => alert("This course will be available soon!");
+
+        const btn3 = document.getElementById("course3-btn");
+        btn3.disabled = false;
+        btn3.style.opacity = "1";
+        btn3.textContent = "Start Course";
+        btn3.className = "btn btn-primary";
+        btn3.onclick = () => alert("This course will be available soon!");
+      }
+    });
+  </script>
+</body>
+</html>

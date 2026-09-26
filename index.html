@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MentorBridge NG – Home</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ===== LANDING PAGE EXTRA STYLES ===== */
+    .hero {
+      background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+      color: white;
+      padding: 60px 20px 50px;
+      text-align: center;
+    }
+
+    .hero-logo {
+      width: 70px;
+      height: 70px;
+      background: white;
+      color: #0d9488;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin: 0 auto 20px;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      opacity: 0.95;
+      max-width: 340px;
+      margin: 0 auto 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .btn-white {
+      background: white;
+      color: #0d9488;
+      font-weight: 600;
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+
+    .section {
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray-500);
+      margin-bottom: 28px;
+      font-size: 15px;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border: 1px solid var(--gray-100);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      background: #ccfbf1;
+      color: #0d9488;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    .problem-box {
+      background: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 16px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 16px;
+    }
+
+    .problem-box h4 {
+      color: #b91c1c;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .problem-box p {
+      font-size: 14px;
+      color: #7f1d1d;
+    }
+
+    .cta-section {
+      background: #ecfdf5;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 13px;
+      color: var(--gray-500);
+      border-top: 1px solid var(--gray-100);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+      <div class="hero-logo">MB</div>
+      <h1>Bridge the Gap Between<br>NYSC Corps Members & Out-of-School Children</h1>
+      <p>
+        MentorBridge NG is a gig-economy platform that connects verified NYSC members with community learning opportunities while building their professional portfolios.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="login.html" class="btn btn-white">Login</a>
+        <a href="login.html" class="btn btn-outline-white">Get Started</a>
+      </div>
+    </section>
+
+    <!-- ===== THE PROBLEM ===== -->
+    <section class="section">
+      <h2 class="section-title">The Challenge</h2>
+      <p class="section-subtitle">Two critical national problems we solve at once</p>
+
+      <div class="problem-box">
+        <h4>1. Out-of-School Children Crisis</h4>
+        <p>Millions of Nigerian children lack access to basic literacy, numeracy and soft skills due to economic and geographic barriers.</p>
+      </div>
+
+      <div class="problem-box">
+        <h4>2. NYSC Value Realization Gap</h4>
+        <p>Over 300,000 corps members are deployed yearly, many struggling to find meaningful CDS projects that provide real experience and career value.</p>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="section" style="background: #f9fafb;">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">Simple, structured and impactful</p>
+
+      <div class="feature-card">
+        <div class="feature-icon">1</div>
+        <h3>Complete Mandatory Training</h3>
+        <p>Corps members must finish the “Child Safeguarding & Ethics 101” course before accessing any gigs.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">2</div>
+        <h3>Discover & Claim Gigs</h3>
+        <p>Browse community learning opportunities posted by Field Officers and claim the ones that match your location and interest.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">3</div>
+        <h3>Deliver & Submit Proof</h3>
+        <p>Conduct the sessions, upload attendance sheets and photos/videos as proof of work.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">4</div>
+        <h3>Get Rated & Build Portfolio</h3>
+        <p>Earn ratings, digital badges, service hours and a public portfolio you can use after NYSC.</p>
+      </div>
+    </section>
+
+    <!-- ===== KEY FEATURES ===== -->
+    <section class="section">
+      <h2 class="section-title">Key Features</h2>
+
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>NGO Skills Academy</h3>
+        <p>Short, practical courses on child protection, facilitation and community development.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🛒</div>
+        <h3>Gig Marketplace</h3>
+        <p>Field officers post learning gigs. Corps members discover and claim them easily.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3>Proof & Verification</h3>
+        <p>Simple submission of attendance links + media. Admins review and approve.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">👤</div>
+        <h3>Public Portfolio</h3>
+        <p>Verified ratings, badges and completed gigs that serve as career currency after service year.</p>
+      </div>
+    </section>
+
+    <!-- ===== CALL TO ACTION ===== -->
+    <section class="cta-section">
+      <h2 class="section-title">Ready to Make Impact?</h2>
+      <p class="section-subtitle" style="margin-bottom: 24px;">
+        Join MentorBridge NG and turn your service year into meaningful experience.
+      </p>
+      <a href="login.html" class="btn btn-primary" style="max-width: 260px; margin: 0 auto;">
+        Get Started Now
+      </a>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <p>MentorBridge NG • Built for NYSC CDS Innovation</p>
+      <p style="margin-top: 6px;">© 2025 MentorBridge NG</p>
+    </footer>
+
+  </div>
+</body>
+</html>
