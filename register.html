@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register – MentorBridge NG</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .login-container { padding-top: 40px; }
+    .logo {
+      width: 70px; height: 70px;
+      background: var(--primary);
+      border-radius: 20px;
+      margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 28px; font-weight: bold;
+    }
+    .error-message {
+      background: #fef2f2; color: #b91c1c;
+      padding: 10px 14px; border-radius: 8px;
+      font-size: 14px; margin-bottom: 16px; display: none;
+    }
+    .success-message {
+      background: #d1fae5; color: #065f46;
+      padding: 10px 14px; border-radius: 8px;
+      font-size: 14px; margin-bottom: 16px; display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="page login-container">
+      <div class="text-center mb-4">
+        <div class="logo">MB</div>
+        <h1 style="font-size: 24px; margin-bottom: 8px;">Create Account</h1>
+        <p style="color: var(--gray-500);">Register to join MentorBridge NG</p>
+      </div>
+
+      <div class="card">
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="fullName" placeholder="John Beloved" />
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="johnbeloved@mentorbridge.ng" />
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Create a password" />
+        </div>
+
+        <div class="form-group">
+          <label>Role</label>
+          <select id="role">
+            <option value="">Select your role</option>
+            <option value="Corps Member">Corps Member (NYSC)</option>
+            <option value="Field Officer">Field Officer / Admin</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="nyscCodeGroup" style="display: none;">
+          <label>NYSC State Code</label>
+          <input type="text" id="nyscCode" placeholder="e.g. KN/24A/1234" />
+          <small style="color: var(--gray-500); font-size: 12px;">Required for Corps Members</small>
+        </div>
+
+        <button class="btn btn-primary" onclick="handleRegister()">
+          Create Account
+        </button>
+      </div>
+
+      <p class="text-center mt-4" style="font-size: 14px; color: var(--gray-500);">
+        Already have an account?
+        <a href="login.html" style="color: var(--primary); font-weight: 600;">Login</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Show/hide NYSC Code field based on role
+    document.getElementById("role").addEventListener("change", function() {
+      const nyscGroup = document.getElementById("nyscCodeGroup");
+      nyscGroup.style.display = this.value === "Corps Member" ? "block" : "none";
+    });
+
+    function handleRegister() {
+      const fullName = document.getElementById("fullName").value.trim();
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+      const nyscCode = document.getElementById("nyscCode").value.trim();
+
+      const errorMsg = document.getElementById("error-message");
+      const successMsg = document.getElementById("success-message");
+
+      errorMsg.style.display = "none";
+      successMsg.style.display = "none";
+
+      // Validation
+      if (!fullName || !email || !password || !role) {
+        errorMsg.textContent = "Please fill in all required fields.";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      if (role === "Corps Member" && !nyscCode) {
+        errorMsg.textContent = "NYSC State Code is required for Corps Members.";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      // Simple NYSC code format check (example)
+      if (role === "Corps Member" && nyscCode.length < 8) {
+        errorMsg.textContent = "Please enter a valid NYSC State Code.";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      // Save user to localStorage
+      const user = {
+        fullName,
+        email,
+        password,
+        role,
+        nyscCode: role === "Corps Member" ? nyscCode : null,
+        courseCompleted: false,
+        registeredAt: new Date().toISOString()
+      };
+
+      localStorage.setItem("mentorbridge_user", JSON.stringify(user));
+      localStorage.setItem("course_safeguarding_completed", "false");
+
+      successMsg.textContent = "Account created successfully! Redirecting to login...";
+      successMsg.style.display = "block";
+
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
