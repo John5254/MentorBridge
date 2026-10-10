@@ -4,256 +4,624 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MentorBridge NG – Home</title>
-  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    /* ===== LANDING PAGE EXTRA STYLES ===== */
+    :root {
+      --primary: #0A7A4B;
+      --primary-dark: #065F3A;
+      --primary-light: #D1FAE5;
+      --primary-soft: #ECFDF5;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --red-50: #fef2f2;
+      --red-600: #dc2626;
+      --radius: 16px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: white;
+      border-bottom: 1px solid var(--gray-100);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.03);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--primary);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text strong {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      color: var(--gray-500);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-700);
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .header-cta {
+      display: none;
+    }
+
+    /* ===== HERO ===== */
     .hero {
-      background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+      background: linear-gradient(145deg, #0A7A4B 0%, #065F3A 60%, #04402A 100%);
       color: white;
-      padding: 60px 20px 50px;
+      padding: 64px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-logo {
-      width: 70px;
-      height: 70px;
+      width: 100px;
+      height: 100px;
       background: white;
-      color: #0d9488;
-      border-radius: 18px;
+      border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
-      font-weight: bold;
-      margin: 0 auto 20px;
+      margin: 0 auto 28px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+      padding: 16px;
+    }
+
+    .hero-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .hero h1 {
-      font-size: 28px;
-      line-height: 1.3;
-      margin-bottom: 12px;
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      margin-bottom: 18px;
     }
 
     .hero p {
-      font-size: 16px;
-      opacity: 0.95;
-      max-width: 340px;
-      margin: 0 auto 28px;
+      font-size: 17px;
+      opacity: 0.93;
+      max-width: 540px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
     }
 
     .hero-buttons {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      max-width: 280px;
+      gap: 14px;
+      max-width: 300px;
       margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 28px;
+      border-radius: 12px;
+      font-size: 15.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
     }
 
     .btn-white {
       background: white;
-      color: #0d9488;
-      font-weight: 600;
+      color: var(--primary-dark);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.16);
     }
 
     .btn-outline-white {
       background: transparent;
-      border: 2px solid white;
+      border: 1.5px solid rgba(255,255,255,0.75);
       color: white;
     }
 
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: white;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 16px rgba(10, 122, 75, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ===== SECTIONS ===== */
     .section {
-      padding: 40px 20px;
+      padding: 72px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 48px;
     }
 
     .section-title {
-      font-size: 22px;
+      font-size: 28px;
       font-weight: 700;
-      margin-bottom: 8px;
-      text-align: center;
+      letter-spacing: -0.4px;
+      margin-bottom: 10px;
     }
 
     .section-subtitle {
-      text-align: center;
       color: var(--gray-500);
-      margin-bottom: 28px;
-      font-size: 15px;
-    }
-
-    .feature-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 16px;
-      border: 1px solid var(--gray-100);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-
-    .feature-icon {
-      width: 42px;
-      height: 42px;
-      background: #ccfbf1;
-      color: #0d9488;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-
-    .feature-card h3 {
       font-size: 16px;
-      margin-bottom: 6px;
     }
 
-    .feature-card p {
-      font-size: 14px;
-      color: var(--gray-500);
+    .problem-grid {
+      display: grid;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .problem-box {
-      background: #fef2f2;
-      border-left: 4px solid #ef4444;
-      padding: 16px;
-      border-radius: 0 12px 12px 0;
-      margin-bottom: 16px;
+      background: var(--red-50);
+      border-left: 4px solid var(--red-600);
+      padding: 24px 28px;
+      border-radius: 0 16px 16px 0;
     }
 
     .problem-box h4 {
       color: #b91c1c;
-      font-size: 15px;
-      margin-bottom: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
     }
 
     .problem-box p {
-      font-size: 14px;
+      font-size: 15px;
       color: #7f1d1d;
+      line-height: 1.55;
+    }
+
+    .features-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.55;
     }
 
     .cta-section {
-      background: #ecfdf5;
+      background: linear-gradient(180deg, #ECFDF5 0%, #F0FDF4 100%);
       text-align: center;
-      padding: 40px 20px;
+      padding: 80px 0;
     }
 
     .footer {
       text-align: center;
-      padding: 24px 20px;
-      font-size: 13px;
+      padding: 48px 0;
+      font-size: 14px;
       color: var(--gray-500);
       border-top: 1px solid var(--gray-100);
+      background: var(--gray-50);
+    }
+
+    .footer-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo strong {
+      font-size: 20px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .footer-logo span {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .bg-light {
+      background: var(--gray-50);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 640px) {
+      .hero-buttons {
+        flex-direction: row;
+        justify-content: center;
+        max-width: none;
+        gap: 16px;
+      }
+
+      .btn {
+        min-width: 160px;
+      }
+
+      .problem-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .header-cta {
+        display: block;
+      }
+
+      .header-cta .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        padding: 90px 0 110px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .hero-logo {
+        width: 110px;
+        height: 110px;
+      }
+
+      .section {
+        padding: 90px 0;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        padding: 0 32px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <!-- ===== HERO SECTION ===== -->
-    <section class="hero">
-      <div class="hero-logo">MB</div>
-      <h1>Bridge the Gap Between<br>NYSC Corps Members & Out-of-School Children</h1>
-      <p>
-        MentorBridge NG is a gig-economy platform that connects verified NYSC members with community learning opportunities while building their professional portfolios.
-      </p>
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo-link">
+          <div class="logo-icon">
+            <img src="https://i.ibb.co/8nRZn2D5/IMG-20261008-WA0030.jpg" alt="MentorBridge NG">
+          </div>
+          <div class="logo-text">
+            <strong>MentorBridge NG</strong>
+            <span>Learn • Grow • Make an Impact</span>
+          </div>
+        </a>
 
-      <div class="hero-buttons">
-        <a href="login.html" class="btn btn-white">Login</a>
-        <a href="login.html" class="btn btn-outline-white">Get Started</a>
+        <nav class="nav-links">
+          <a href="#how-it-works">How it Works</a>
+          <a href="#features">Features</a>
+          <a href="login.html">Login</a>
+        </nav>
+
+        <div class="header-cta">
+          <a href="login.html" class="btn btn-primary">Get Started</a>
+        </div>
       </div>
-    </section>
+    </div>
+  </header>
 
-    <!-- ===== THE PROBLEM ===== -->
-    <section class="section">
-      <h2 class="section-title">The Challenge</h2>
-      <p class="section-subtitle">Two critical national problems we solve at once</p>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-logo">
+          <img src="https://i.ibb.co/8nRZn2D5/IMG-20261008-WA0030.jpg" alt="MentorBridge NG Logo">
+        </div>
+        
+        <h1>Bridge the Gap Between<br>NYSC Corps Members & Out-of-School Children</h1>
+        <p>
+          MentorBridge NG is a gig-economy platform that connects verified NYSC members with community learning opportunities while building their professional portfolios.
+        </p>
 
-      <div class="problem-box">
-        <h4>1. Out-of-School Children Crisis</h4>
-        <p>Millions of Nigerian children lack access to basic literacy, numeracy and soft skills due to economic and geographic barriers.</p>
+        <div class="hero-buttons">
+          <a href="login.html" class="btn btn-white">Login</a>
+          <a href="login.html" class="btn btn-outline-white">Get Started</a>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="problem-box">
-        <h4>2. NYSC Value Realization Gap</h4>
-        <p>Over 300,000 corps members are deployed yearly, many struggling to find meaningful CDS projects that provide real experience and career value.</p>
-      </div>
-    </section>
-
-    <!-- ===== HOW IT WORKS ===== -->
-    <section class="section" style="background: #f9fafb;">
-      <h2 class="section-title">How It Works</h2>
-      <p class="section-subtitle">Simple, structured and impactful</p>
-
-      <div class="feature-card">
-        <div class="feature-icon">1</div>
-        <h3>Complete Mandatory Training</h3>
-        <p>Corps members must finish the “Child Safeguarding & Ethics 101” course before accessing any gigs.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">2</div>
-        <h3>Discover & Claim Gigs</h3>
-        <p>Browse community learning opportunities posted by Field Officers and claim the ones that match your location and interest.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">3</div>
-        <h3>Deliver & Submit Proof</h3>
-        <p>Conduct the sessions, upload attendance sheets and photos/videos as proof of work.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">4</div>
-        <h3>Get Rated & Build Portfolio</h3>
-        <p>Earn ratings, digital badges, service hours and a public portfolio you can use after NYSC.</p>
-      </div>
-    </section>
-
-    <!-- ===== KEY FEATURES ===== -->
-    <section class="section">
-      <h2 class="section-title">Key Features</h2>
-
-      <div class="feature-card">
-        <div class="feature-icon">📚</div>
-        <h3>NGO Skills Academy</h3>
-        <p>Short, practical courses on child protection, facilitation and community development.</p>
+  <!-- ===== THE PROBLEM ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">The Challenge</h2>
+        <p class="section-subtitle">Two critical national problems we solve at once</p>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">🛒</div>
-        <h3>Gig Marketplace</h3>
-        <p>Field officers post learning gigs. Corps members discover and claim them easily.</p>
+      <div class="problem-grid">
+        <div class="problem-box">
+          <h4>1. Out-of-School Children Crisis</h4>
+          <p>Millions of Nigerian children lack access to basic literacy, numeracy and soft skills due to economic and geographic barriers.</p>
+        </div>
+
+        <div class="problem-box">
+          <h4>2. NYSC Value Realization Gap</h4>
+          <p>Over 300,000 corps members are deployed yearly, many struggling to find meaningful CDS projects that provide real experience and career value.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="section bg-light" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Simple, structured and impactful</p>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">✅</div>
-        <h3>Proof & Verification</h3>
-        <p>Simple submission of attendance links + media. Admins review and approve.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">1</div>
+          <h3>Complete Mandatory Training</h3>
+          <p>Corps members must finish the “Child Safeguarding & Ethics 101” course before accessing any gigs.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">2</div>
+          <h3>Discover & Claim Gigs</h3>
+          <p>Browse community learning opportunities posted by Field Officers and claim the ones that match your location and interest.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">3</div>
+          <h3>Deliver & Submit Proof</h3>
+          <p>Conduct the sessions, upload attendance sheets and photos/videos as proof of work.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">4</div>
+          <h3>Get Rated & Build Portfolio</h3>
+          <p>Earn ratings, digital badges, service hours and a public portfolio you can use after NYSC.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KEY FEATURES ===== -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Key Features</h2>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">👤</div>
-        <h3>Public Portfolio</h3>
-        <p>Verified ratings, badges and completed gigs that serve as career currency after service year.</p>
-      </div>
-    </section>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>NGO Skills Academy</h3>
+          <p>Short, practical courses on child protection, facilitation and community development.</p>
+        </div>
 
-    <!-- ===== CALL TO ACTION ===== -->
-    <section class="cta-section">
+        <div class="feature-card">
+          <div class="feature-icon">🛒</div>
+          <h3>Gig Marketplace</h3>
+          <p>Field officers post learning gigs. Corps members discover and claim them easily.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">✅</div>
+          <h3>Proof & Verification</h3>
+          <p>Simple submission of attendance links + media. Admins review and approve.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👤</div>
+          <h3>Public Portfolio</h3>
+          <p>Verified ratings, badges and completed gigs that serve as career currency after service year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-section">
+    <div class="container">
       <h2 class="section-title">Ready to Make Impact?</h2>
-      <p class="section-subtitle" style="margin-bottom: 24px;">
+      <p class="section-subtitle" style="margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto;">
         Join MentorBridge NG and turn your service year into meaningful experience.
       </p>
-      <a href="login.html" class="btn btn-primary" style="max-width: 260px; margin: 0 auto;">
+      <a href="login.html" class="btn btn-primary">
         Get Started Now
       </a>
-    </section>
+    </div>
+  </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-      <p>MentorBridge NG • Built for NYSC CDS Innovation</p>
-      <p style="margin-top: 6px;">© 2025 MentorBridge NG</p>
-    </footer>
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <strong>MentorBridge NG</strong>
+        <span>Learn • Grow • Make an Impact</span>
+      </div>
+      <p>Built for NYSC CDS Innovation</p>
+      <p style="margin-top: 8px;">© 2025 MentorBridge NG</p>
+    </div>
+  </footer>
 
-  </div>
 </body>
 </html>
