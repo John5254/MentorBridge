@@ -4,30 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Marketplace – MentorBridge NG</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #0A7A4B;
+      --primary-dark: #065F3A;
+      --primary-light: #D1FAE5;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f1f5f9;
+      color: var(--gray-900);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .layout { min-height: 100vh; }
+    .sidebar { display: none; }
+    .main { min-width: 0; flex: 1; }
+
+    .header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px;
+      background: white;
+      border-bottom: 1px solid var(--gray-100);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .logo { width: 38px; height: 38px; border-radius: 10px; object-fit: contain; }
+    .header h1 { font-size: 18px; font-weight: 700; }
+
+    .content { max-width: 1150px; margin: 0 auto; padding: 24px 20px 110px; }
+
+    /* Search & Filters */
     .search-box {
       position: relative;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
-
     .search-box input {
       width: 100%;
-      padding: 13px 16px 13px 44px;
-      border: 1px solid var(--gray-200);
-      border-radius: 12px;
+      padding: 14px 16px 14px 46px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 14px;
       font-size: 15px;
       outline: none;
       background: white;
     }
-
-    .search-box input:focus {
-      border-color: var(--primary);
-    }
-
+    .search-box input:focus { border-color: var(--primary); }
     .search-icon {
       position: absolute;
-      left: 14px;
+      left: 16px;
       top: 50%;
       transform: translateY(-50%);
       font-size: 18px;
@@ -37,24 +70,22 @@
     .filters {
       display: flex;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       overflow-x: auto;
       padding-bottom: 4px;
     }
-
     .filter-select {
-      padding: 9px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--gray-200);
+      padding: 10px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 12px;
       font-size: 13px;
       background: white;
-      min-width: 120px;
+      min-width: 130px;
     }
-
     .clear-btn {
-      padding: 9px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--gray-200);
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--gray-200);
       background: white;
       font-size: 13px;
       color: var(--gray-600);
@@ -62,192 +93,217 @@
       white-space: nowrap;
     }
 
-    /* Status Badges */
+    /* Gig Cards */
+    .gig-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border: 1px solid var(--gray-100);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      transition: 0.2s;
+    }
+    .gig-card:hover {
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+    }
+    .gig-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .gig-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 14px;
+    }
     .badge {
       display: inline-flex;
-      align-items: center;
       padding: 4px 10px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: 600;
     }
-
     .badge-open {
       background: #d1fae5;
       color: #065f46;
     }
-
-    .badge-progress {
-      background: #dbeafe;
-      color: #1e40af;
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 8px;
     }
-
-    .badge-completed {
-      background: #e0e7ff;
-      color: #3730a3;
-    }
-
-    .badge-closed {
-      background: #f3f4f6;
-      color: #4b5563;
-    }
+    .btn-primary:hover { background: var(--primary-dark); }
 
     .no-results {
       text-align: center;
-      padding: 50px 20px;
+      padding: 60px 20px;
       color: var(--gray-500);
+    }
+
+    /* Bottom nav */
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: white; border-top: 1px solid var(--gray-100);
+      display: flex; justify-content: space-around;
+      padding: 10px 0 12px; z-index: 100;
+    }
+    .nav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      color: #9ca3af; font-size: 11px; font-weight: 500;
+    }
+    .nav-item span { font-size: 20px; }
+    .nav-item.active { color: var(--primary); }
+
+    /* Desktop Sidebar */
+    @media (min-width: 768px) {
+      .layout { display: flex; }
+      .sidebar {
+        display: flex; flex-direction: column;
+        width: 250px; flex-shrink: 0; height: 100vh;
+        position: sticky; top: 0;
+        background: white; border-right: 1px solid var(--gray-100); padding: 24px;
+      }
+      .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+      .brand span { font-size: 17px; font-weight: 700; }
+      .side-link {
+        display: flex; align-items: center; gap: 12px;
+        padding: 12px 16px; border-radius: 12px; margin-bottom: 4px;
+        color: var(--gray-500); font-size: 14px; font-weight: 500;
+      }
+      .side-link:hover { background: var(--gray-50); }
+      .side-link.active { background: var(--primary-light); color: var(--primary); }
+      .side-link span { font-size: 18px; }
+
+      .bottom-nav { display: none; }
+      .header .logo { display: none; }
+      .header { padding: 18px 40px; }
+      .header h1 { font-size: 24px; }
+      .content { padding: 40px; }
+    }
+
+    @media (min-width: 1100px) {
+      .gig-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .gig-card { margin-bottom: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Marketplace</h1>
+  <div class="layout">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="https://i.ibb.co/8nRZn2D5/IMG-20261008-WA0030.jpg" alt="Logo" class="logo">
+        <span>MentorBridge NG</span>
+      </div>
+      <a href="home.html" class="side-link"><span>🏠</span> Home</a>
+      <a href="academy.html" class="side-link"><span>📚</span> Academy</a>
+      <a href="marketplace.html" class="side-link active"><span>🛒</span> Marketplace</a>
+      <a href="my-gigs.html" class="side-link"><span>📋</span> My Gigs</a>
+      <a href="profile.html" class="side-link"><span>👤</span> Profile</a>
+    </aside>
+
+    <div class="main">
+      <div class="header">
+        <img src="https://i.ibb.co/8nRZn2D5/IMG-20261008-WA0030.jpg" alt="Logo" class="logo">
+        <h1>Marketplace</h1>
+      </div>
+
+      <main class="content">
+        <!-- Search -->
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search gigs..." oninput="filterGigs()">
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+          <select id="locationFilter" class="filter-select" onchange="filterGigs()">
+            <option value="">All Locations</option>
+            <option value="Kano">Kano</option>
+            <option value="Kaduna">Kaduna</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Abuja">Abuja</option>
+          </select>
+          <select id="durationFilter" class="filter-select" onchange="filterGigs()">
+            <option value="">All Durations</option>
+            <option value="1 Week">1 Week</option>
+            <option value="2 Weeks">2 Weeks</option>
+            <option value="3 Weeks">3 Weeks</option>
+          </select>
+          <button class="clear-btn" onclick="clearFilters()">Clear</button>
+        </div>
+
+        <!-- Gig List -->
+        <div class="gig-list" id="gig-list"></div>
+        <div id="no-results" class="no-results" style="display: none;">
+          <div style="font-size: 40px; margin-bottom: 12px;">🔍</div>
+          <h3>No gigs found</h3>
+          <p>Try changing your search or filters</p>
+        </div>
+      </main>
     </div>
-
-    <div class="page">
-      <!-- Search -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Search gigs..." oninput="filterGigs()" />
-      </div>
-
-      <!-- Filters -->
-      <div class="filters">
-        <select id="locationFilter" class="filter-select" onchange="filterGigs()">
-          <option value="">All Locations</option>
-          <option value="Kano">Kano</option>
-          <option value="Kaduna">Kaduna</option>
-          <option value="Lagos">Lagos</option>
-          <option value="Abuja">Abuja</option>
-        </select>
-
-        <select id="durationFilter" class="filter-select" onchange="filterGigs()">
-          <option value="">All Durations</option>
-          <option value="1 Week">1 Week</option>
-          <option value="2 Weeks">2 Weeks</option>
-          <option value="3 Weeks">3 Weeks</option>
-        </select>
-
-        <button class="clear-btn" onclick="clearFilters()">Clear</button>
-      </div>
-
-      <!-- Gig List -->
-      <div id="gig-list"></div>
-      <div id="no-results" class="no-results" style="display: none;">
-        <div style="font-size: 40px; margin-bottom: 12px;">🔍</div>
-        <h3>No gigs found</h3>
-        <p>Try changing your search or filters</p>
-      </div>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <a href="home.html" class="nav-item">
-        <span>🏠</span>
-        Home
-      </a>
-      <a href="academy.html" class="nav-item">
-        <span>📚</span>
-        Academy
-      </a>
-      <a href="marketplace.html" class="nav-item active">
-        <span>🛒</span>
-        Marketplace
-      </a>
-      <a href="my-gigs.html" class="nav-item">
-        <span>📋</span>
-        My Gigs
-      </a>
-      <a href="profile.html" class="nav-item">
-        <span>👤</span>
-        Profile
-      </a>
-    </nav>
   </div>
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <!-- Mobile Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-item"><span>🏠</span>Home</a>
+    <a href="academy.html" class="nav-item"><span>📚</span>Academy</a>
+    <a href="marketplace.html" class="nav-item active"><span>🛒</span>Marketplace</a>
+    <a href="my-gigs.html" class="nav-item"><span>📋</span>My Gigs</a>
+    <a href="profile.html" class="nav-item"><span>👤</span>Profile</a>
+  </nav>
+
   <script>
-    // Extended mock data with more gigs and statuses
     const allGigs = [
-      {
-        id: "gig001",
-        title: "Community Literacy Mentor",
-        location: "Kano",
-        children: 25,
-        duration: "2 Weeks",
-        status: "Open",
-        reward: "₦10,000"
-      },
-      {
-        id: "gig002",
-        title: "Weekend Numeracy Coach",
-        location: "Kaduna",
-        children: 15,
-        duration: "1 Week",
-        status: "Open",
-        reward: "₦7,500"
-      },
-      {
-        id: "gig003",
-        title: "Reading Circle Facilitator",
-        location: "Kano",
-        children: 20,
-        duration: "3 Weeks",
-        status: "Open",
-        reward: "₦12,000"
-      },
-      {
-        id: "gig004",
-        title: "Basic Science Tutor",
-        location: "Lagos",
-        children: 18,
-        duration: "2 Weeks",
-        status: "Open",
-        reward: "₦9,000"
-      }
+      { id: "gig001", title: "Community Literacy Mentor", location: "Kano", children: 25, duration: "2 Weeks", status: "Open", reward: "₦10,000" },
+      { id: "gig002", title: "Weekend Numeracy Coach", location: "Kaduna", children: 15, duration: "1 Week", status: "Open", reward: "₦7,500" },
+      { id: "gig003", title: "Reading Circle Facilitator", location: "Kano", children: 20, duration: "3 Weeks", status: "Open", reward: "₦12,000" },
+      { id: "gig004", title: "Basic Science Tutor", location: "Lagos", children: 18, duration: "2 Weeks", status: "Open", reward: "₦9,000" }
     ];
 
-    function getStatusBadge(status) {
-      const statusMap = {
-        "Open": "badge-open",
-        "In Progress": "badge-progress",
-        "Completed": "badge-completed",
-        "Closed": "badge-closed"
-      };
-      return `<span class="badge ${statusMap[status] || 'badge-open'}">${status}</span>`;
-    }
-
-    function renderGigs(gigsToShow) {
+    function renderGigs(gigs) {
       const list = document.getElementById("gig-list");
       const noResults = document.getElementById("no-results");
-
       list.innerHTML = "";
 
-      if (gigsToShow.length === 0) {
+      if (gigs.length === 0) {
         noResults.style.display = "block";
         return;
       }
-
       noResults.style.display = "none";
 
-      gigsToShow.forEach(gig => {
+      gigs.forEach(gig => {
         list.innerHTML += `
-          <div class="card">
-            <div class="card-title">${gig.title}</div>
-            <div class="card-meta">
+          <div class="gig-card">
+            <h3>${gig.title}</h3>
+            <div class="gig-meta">
               <span>📍 ${gig.location}</span>
               <span>👥 ${gig.children} Children</span>
               <span>⏱ ${gig.duration}</span>
             </div>
-            <div class="flex justify-between items-center mt-2">
-              ${getStatusBadge(gig.status)}
-              <span style="font-weight: 600; color: var(--primary);">${gig.reward}</span>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="badge badge-open">${gig.status}</span>
+              <strong style="color:var(--primary)">${gig.reward}</strong>
             </div>
-            <a href="gig-details.html?id=${gig.id}" class="btn btn-primary mt-4" style="display:block; text-align:center;">
-              View Details
-            </a>
+            <a href="gig-details.html?id=${gig.id}" class="btn-primary">View Details</a>
           </div>
         `;
       });
@@ -259,12 +315,10 @@
       const duration = document.getElementById("durationFilter").value;
 
       const filtered = allGigs.filter(gig => {
-        const matchSearch = gig.title.toLowerCase().includes(search);
-        const matchLocation = location === "" || gig.location === location;
-        const matchDuration = duration === "" || gig.duration === duration;
-        return matchSearch && matchLocation && matchDuration;
+        return gig.title.toLowerCase().includes(search) &&
+               (location === "" || gig.location === location) &&
+               (duration === "" || gig.duration === duration);
       });
-
       renderGigs(filtered);
     }
 
@@ -275,7 +329,6 @@
       renderGigs(allGigs);
     }
 
-    // Initial render
     renderGigs(allGigs);
   </script>
 </body>
