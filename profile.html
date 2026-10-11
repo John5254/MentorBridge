@@ -4,70 +4,101 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profile – MentorBridge NG</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #0A7A4B;
+      --primary-dark: #065F3A;
+      --primary-light: #D1FAE5;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f1f5f9;
+      color: var(--gray-900);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .layout { min-height: 100vh; }
+    .sidebar { display: none; }
+    .main { min-width: 0; flex: 1; }
+
+    .header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px;
+      background: white;
+      border-bottom: 1px solid var(--gray-100);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .logo { width: 38px; height: 38px; border-radius: 10px; object-fit: contain; }
+    .header h1 { font-size: 18px; font-weight: 700; }
+
+    .content { max-width: 800px; margin: 0 auto; padding: 24px 20px 110px; }
+
     .profile-header {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
-
     .avatar-large {
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #ccfbf1;
-      margin-bottom: 12px;
+      border: 4px solid var(--primary-light);
+      margin-bottom: 16px;
     }
-
     .profile-header h2 {
-      font-size: 22px;
+      font-size: 24px;
+      font-weight: 700;
       margin-bottom: 4px;
     }
-
     .profile-header .role {
       color: var(--gray-500);
       font-size: 14px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
-
     .rating {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       background: #fef3c7;
       color: #92400e;
-      padding: 4px 10px;
+      padding: 6px 14px;
       border-radius: 20px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
     }
 
     .stats-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 28px;
+      gap: 14px;
+      margin-bottom: 32px;
     }
-
     .stat-box {
       background: white;
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 20px;
       text-align: center;
       border: 1px solid var(--gray-100);
     }
-
     .stat-box .number {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 26px;
+      font-weight: 800;
       color: var(--primary);
     }
-
     .stat-box .label {
       font-size: 13px;
       color: var(--gray-500);
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
     .section-title {
@@ -79,145 +110,167 @@
     .badges-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 28px;
+      gap: 14px;
+      margin-bottom: 32px;
     }
-
     .badge-card {
       background: white;
       border: 1px solid var(--gray-100);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 20px;
       text-align: center;
     }
-
     .badge-card .icon {
       font-size: 28px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
-
     .badge-card h4 {
       font-size: 14px;
       font-weight: 600;
     }
 
+    .history-card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--gray-100);
+      overflow: hidden;
+    }
     .history-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 0;
+      padding: 16px 20px;
       border-bottom: 1px solid var(--gray-100);
     }
+    .history-item:last-child { border-bottom: none; }
+    .history-item h4 { font-size: 15px; font-weight: 600; }
+    .history-item p { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
 
-    .history-item:last-child {
-      border-bottom: none;
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: white; border-top: 1px solid var(--gray-100);
+      display: flex; justify-content: space-around;
+      padding: 10px 0 12px; z-index: 100;
     }
-
-    .history-item h4 {
-      font-size: 15px;
+    .nav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      color: #9ca3af; font-size: 11px; font-weight: 500;
     }
+    .nav-item span { font-size: 20px; }
+    .nav-item.active { color: var(--primary); }
 
-    .history-item p {
-      font-size: 13px;
-      color: var(--gray-500);
+    @media (min-width: 768px) {
+      .layout { display: flex; }
+      .sidebar {
+        display: flex; flex-direction: column;
+        width: 250px; flex-shrink: 0; height: 100vh;
+        position: sticky; top: 0;
+        background: white; border-right: 1px solid var(--gray-100); padding: 24px;
+      }
+      .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+      .brand span { font-size: 17px; font-weight: 700; }
+      .side-link {
+        display: flex; align-items: center; gap: 12px;
+        padding: 12px 16px; border-radius: 12px; margin-bottom: 4px;
+        color: var(--gray-500); font-size: 14px; font-weight: 500;
+      }
+      .side-link:hover { background: var(--gray-50); }
+      .side-link.active { background: var(--primary-light); color: var(--primary); }
+      .side-link span { font-size: 18px; }
+
+      .bottom-nav { display: none; }
+      .header .logo { display: none; }
+      .header { padding: 18px 40px; }
+      .header h1 { font-size: 24px; }
+      .content { padding: 40px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <h1>Profile</h1>
-      <button style="background:none; border:none; font-size:20px; cursor:pointer;">⚙️</button>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="https://i.ibb.co/8nRZn2D5/IMG-20261008-WA0030.jpg" alt="Logo" class="logo">
+        <span>MentorBridge NG</span>
+      </div>
+      <a href="home.html" class="side-link"><span>🏠</span> Home</a>
+      <a href="academy.html" class="side-link"><span>📚</span> Academy</a>
+      <a href="marketplace.html" class="side-link"><span>🛒</span> Marketplace</a>
+      <a href="my-gigs.html" class="side-link"><span>📋</span> My Gigs</a>
+      <a href="profile.html" class="side-link active"><span>👤</span> Profile</a>
+    </aside>
+
+    <div class="main">
+      <div class="header">
+        <img src="https://i.ibb.co/8nRZn2D5/IMG-20261008-WA0030.jpg" alt="Logo" class="logo">
+        <h1>Profile</h1>
+      </div>
+
+      <main class="content">
+        <div class="profile-header">
+          <img src="https://i.pravatar.cc/150?img=12" alt="Avatar" class="avatar-large">
+          <h2>John Beloved</h2>
+          <div class="role">NYSC Corps Member • Kano State</div>
+          <div class="rating">⭐ 4.8 / 5 (12 reviews)</div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="number">12</div>
+            <div class="label">Completed Gigs</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">84</div>
+            <div class="label">Service Hours</div>
+          </div>
+        </div>
+
+        <div class="section-title">Badges</div>
+        <div class="badges-grid">
+          <div class="badge-card">
+            <div class="icon">🛡️</div>
+            <h4>Mentor Certification</h4>
+          </div>
+          <div class="badge-card">
+            <div class="icon">📍</div>
+            <h4>Community Educator</h4>
+          </div>
+        </div>
+
+        <div class="section-title">Portfolio History</div>
+        <div class="history-card">
+          <div class="history-item">
+            <div>
+              <h4>Community Literacy Mentor</h4>
+              <p>Kano • Completed</p>
+            </div>
+            <span>›</span>
+          </div>
+          <div class="history-item">
+            <div>
+              <h4>Weekend Numeracy Coach</h4>
+              <p>Kaduna • Completed</p>
+            </div>
+            <span>›</span>
+          </div>
+          <div class="history-item">
+            <div>
+              <h4>Reading Circle Facilitator</h4>
+              <p>Kano • Completed</p>
+            </div>
+            <span>›</span>
+          </div>
+        </div>
+      </main>
     </div>
-
-    <div class="page">
-      <!-- Profile Header -->
-      <div class="profile-header">
-        <img src="https://i.pravatar.cc/150?img=12" alt="Avatar" class="avatar-large" />
-        <h2>John Beloved</h2>
-        <div class="role">NYSC Corps Member • Kano State</div>
-        <div class="rating">⭐ 4.8 / 5 (12 reviews)</div>
-      </div>
-
-      <!-- Stats -->
-      <div class="stats-row">
-        <div class="stat-box">
-          <div class="number">12</div>
-          <div class="label">Completed Gigs</div>
-        </div>
-        <div class="stat-box">
-          <div class="number">84</div>
-          <div class="label">Service Hours</div>
-        </div>
-      </div>
-
-      <!-- Badges -->
-      <div class="section-title">Badges</div>
-      <div class="badges-grid">
-        <div class="badge-card">
-          <div class="icon">🛡️</div>
-          <h4>Mentor Certification</h4>
-        </div>
-        <div class="badge-card">
-          <div class="icon">📍</div>
-          <h4>Community Educator</h4>
-        </div>
-      </div>
-
-      <!-- Portfolio History -->
-      <div class="section-title">Portfolio History</div>
-      <div class="card">
-        <div class="history-item">
-          <div>
-            <h4>Community Literacy Mentor</h4>
-            <p>Kano • Completed</p>
-          </div>
-          <span>›</span>
-        </div>
-        <div class="history-item">
-          <div>
-            <h4>Weekend Numeracy Coach</h4>
-            <p>Kaduna • Completed</p>
-          </div>
-          <span>›</span>
-        </div>
-        <div class="history-item">
-          <div>
-            <h4>Reading Circle Facilitator</h4>
-            <p>Kano • Completed</p>
-          </div>
-          <span>›</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <a href="home.html" class="nav-item">
-        <span>🏠</span>
-        Home
-      </a>
-      <a href="academy.html" class="nav-item">
-        <span>📚</span>
-        Academy
-      </a>
-      <a href="marketplace.html" class="nav-item">
-        <span>🛒</span>
-        Marketplace
-      </a>
-      <a href="my-gigs.html" class="nav-item">
-        <span>📋</span>
-        My Gigs
-      </a>
-      <a href="profile.html" class="nav-item active">
-        <span>👤</span>
-        Profile
-      </a>
-    </nav>
   </div>
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-item"><span>🏠</span>Home</a>
+    <a href="academy.html" class="nav-item"><span>📚</span>Academy</a>
+    <a href="marketplace.html" class="nav-item"><span>🛒</span>Marketplace</a>
+    <a href="my-gigs.html" class="nav-item"><span>📋</span>My Gigs</a>
+    <a href="profile.html" class="nav-item active"><span>👤</span>Profile</a>
+  </nav>
 </body>
-</html>
+              </html>
