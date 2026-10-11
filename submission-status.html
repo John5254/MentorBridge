@@ -4,58 +4,116 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Submission Status – MentorBridge NG</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #0A7A4B;
+      --primary-dark: #065F3A;
+      --primary-light: #D1FAE5;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f1f5f9;
+      color: var(--gray-900);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .layout { min-height: 100vh; }
+    .sidebar { display: none; }
+    .main { min-width: 0; flex: 1; }
+
+    .header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px;
+      background: white;
+      border-bottom: 1px solid var(--gray-100);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .back-btn {
+      background: var(--gray-100);
+      border: none;
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .header h1 { font-size: 18px; font-weight: 700; }
+
+    .content { max-width: 700px; margin: 0 auto; padding: 24px 20px 50px; }
+
     .status-header {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
-
     .status-icon {
-      width: 72px;
-      height: 72px;
+      width: 80px;
+      height: 80px;
       background: #dbeafe;
       color: #1d4ed8;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 36px;
       margin: 0 auto 16px;
     }
-
     .status-header h1 {
       font-size: 22px;
+      font-weight: 700;
       margin-bottom: 6px;
     }
-
     .status-header p {
       color: var(--gray-500);
-      font-size: 14px;
+      font-size: 15px;
+    }
+
+    .current-status {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .current-status strong {
+      display: block;
+      color: #065f46;
+      margin-bottom: 2px;
+    }
+    .current-status span {
+      font-size: 13px;
+      color: #047857;
     }
 
     .progress-card {
       background: white;
       border-radius: 16px;
-      padding: 20px;
+      padding: 8px 0;
       border: 1px solid var(--gray-100);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
-
     .progress-item {
       display: flex;
       gap: 14px;
-      padding: 12px 0;
+      padding: 16px 20px;
       border-bottom: 1px solid var(--gray-100);
     }
-
-    .progress-item:last-child {
-      border-bottom: none;
-    }
-
+    .progress-item:last-child { border-bottom: none; }
     .progress-dot {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: #d1fae5;
       color: #059669;
@@ -67,17 +125,15 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
-
     .progress-dot.pending {
-      background: #f3f4f6;
+      background: var(--gray-100);
       color: #9ca3af;
     }
-
     .progress-content h4 {
       font-size: 15px;
+      font-weight: 600;
       margin-bottom: 2px;
     }
-
     .progress-content p {
       font-size: 13px;
       color: var(--gray-500);
@@ -85,93 +141,141 @@
 
     .info-box {
       background: #eff6ff;
-      border-radius: 12px;
-      padding: 14px;
+      border-radius: 14px;
+      padding: 16px;
       font-size: 14px;
       color: #1e40af;
       display: flex;
-      gap: 10px;
-      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .btn-outline {
+      display: block;
+      width: 100%;
+      background: white;
+      border: 1.5px solid var(--gray-200);
+      color: var(--gray-700);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .layout { display: flex; }
+      .sidebar {
+        display: flex; flex-direction: column;
+        width: 250px; flex-shrink: 0; height: 100vh;
+        position: sticky; top: 0;
+        background: white; border-right: 1px solid var(--gray-100); padding: 24px;
+      }
+      .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+      .brand span { font-size: 17px; font-weight: 700; }
+      .side-link {
+        display: flex; align-items: center; gap: 12px;
+        padding: 12px 16px; border-radius: 12px; margin-bottom: 4px;
+        color: var(--gray-500); font-size: 14px; font-weight: 500;
+      }
+      .side-link:hover { background: var(--gray-50); }
+      .side-link.active { background: var(--primary-light); color: var(--primary); }
+      .side-link span { font-size: 18px; }
+
+      .header { padding: 18px 40px; }
+      .content { padding: 40px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <button class="back-btn" onclick="history.back()">←</button>
-      <h1>Submission Status</h1>
-      <div style="width: 32px;"></div>
-    </div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="https://i.ibb.co/8nRZn2D5/IMG-20261008-WA0030.jpg" alt="Logo" style="width:38px;height:38px;border-radius:10px;">
+        <span>MentorBridge NG</span>
+      </div>
+      <a href="home.html" class="side-link"><span>🏠</span> Home</a>
+      <a href="academy.html" class="side-link"><span>📚</span> Academy</a>
+      <a href="marketplace.html" class="side-link"><span>🛒</span> Marketplace</a>
+      <a href="my-gigs.html" class="side-link active"><span>📋</span> My Gigs</a>
+      <a href="profile.html" class="side-link"><span>👤</span> Profile</a>
+    </aside>
 
-    <div class="page">
-      <!-- Status Header -->
-      <div class="status-header">
-        <div class="status-icon">📤</div>
-        <h1>Submission Sent</h1>
-        <p>Your proof has been submitted for review.</p>
+    <div class="main">
+      <div class="header">
+        <button class="back-btn" onclick="history.back()">←</button>
+        <h1>Submission Status</h1>
       </div>
 
-      <!-- Current Status -->
-      <div class="card" style="background: #f0fdf4; border-color: #bbf7d0; margin-bottom: 20px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 20px;">⏳</span>
+      <main class="content">
+        <div class="status-header">
+          <div class="status-icon">📤</div>
+          <h1>Submission Sent</h1>
+          <p>Your proof has been submitted for review.</p>
+        </div>
+
+        <div class="current-status">
+          <div style="font-size:24px;">⏳</div>
           <div>
-            <strong style="color: #065f46;">Awaiting Review</strong>
-            <p style="font-size: 13px; color: #047857; margin: 0;">Submitted on 12 Apr 2025, 10:24 AM</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Progress Steps -->
-      <div class="progress-card">
-        <div class="progress-item">
-          <div class="progress-dot">✓</div>
-          <div class="progress-content">
-            <h4>Gig Claimed</h4>
-            <p>12 Apr 2025, 09:12 AM</p>
+            <strong>Awaiting Review</strong>
+            <span>Submitted on 12 Apr 2025, 10:24 AM</span>
           </div>
         </div>
 
-        <div class="progress-item">
-          <div class="progress-dot">✓</div>
-          <div class="progress-content">
-            <h4>Session Conducted</h4>
-            <p>14 Apr 2025, 04:32 PM</p>
+        <div class="progress-card">
+          <div class="progress-item">
+            <div class="progress-dot">✓</div>
+            <div class="progress-content">
+              <h4>Gig Claimed</h4>
+              <p>12 Apr 2025, 09:12 AM</p>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-dot">✓</div>
+            <div class="progress-content">
+              <h4>Session Conducted</h4>
+              <p>14 Apr 2025, 04:32 PM</p>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-dot">✓</div>
+            <div class="progress-content">
+              <h4>Proof Submitted</h4>
+              <p>15 Apr 2025, 10:24 AM</p>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-dot pending">4</div>
+            <div class="progress-content">
+              <h4>Awaiting Approval</h4>
+              <p>Pending Field Officer review</p>
+            </div>
           </div>
         </div>
 
-        <div class="progress-item">
-          <div class="progress-dot">✓</div>
-          <div class="progress-content">
-            <h4>Proof Submitted</h4>
-            <p>15 Apr 2025, 10:24 AM</p>
+        <div class="info-box">
+          <span>ℹ️</span>
+          <div>
+            Your Field Officer will review your submission. You will be notified once it is approved or if revisions are needed.
           </div>
         </div>
 
-        <div class="progress-item">
-          <div class="progress-dot pending">4</div>
-          <div class="progress-content">
-            <h4>Awaiting Approval</h4>
-            <p>Pending Field Officer review</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Info Box -->
-      <div class="info-box">
-        <span>ℹ️</span>
-        <div>
-          Your Field Officer will review your submission. You will be notified once it is approved or if revisions are needed.
-        </div>
-      </div>
-
-      <a href="my-gigs.html" class="btn btn-primary" style="margin-top: 28px;">
-        Back to My Gigs
-      </a>
+        <a href="my-gigs.html" class="btn-primary">Back to My Gigs</a>
+        <a href="home.html" class="btn-outline">Go to Home</a>
+      </main>
     </div>
   </div>
-
-  <script src="data.js"></script>
-  <script src="app.js"></script>
 </body>
 </html>
